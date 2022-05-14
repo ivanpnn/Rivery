@@ -1,0 +1,6 @@
+framework module Pods_Rivery {
+  umbrella header "Pods-Rivery-umbrella.h"
+
+  export *
+  module * { export * }
+}
