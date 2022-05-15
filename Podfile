@@ -7,5 +7,6 @@ target 'Rivery' do
 
   # Pods for Rivery
     pod 'SnapKit'
+    pod 'GTProgressBar'
 
 end

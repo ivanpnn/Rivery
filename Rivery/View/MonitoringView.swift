@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import SnapKit
+import GTProgressBar
 
 class MonitoringView: UIView {
     lazy var riverNameLabel: UILabel = {
@@ -42,6 +43,23 @@ class MonitoringView: UIView {
         return label
     }()
     
+    lazy var riverHeightBar: GTProgressBar = {
+        let bar = GTProgressBar()
+        bar.progress = 0.5
+        bar.orientation = .vertical
+        bar.barBorderColor = UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
+        bar.barFillColor = UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
+        bar.barBackgroundColor = UIColor(red:0.77, green:0.93, blue:0.78, alpha:1.0)
+        bar.barBorderWidth = 1
+        bar.barFillInset = 2
+        bar.labelTextColor = UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
+        bar.progressLabelInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        bar.font = UIFont.boldSystemFont(ofSize: 18)
+        bar.labelPosition = GTProgressBarLabelPosition.bottom
+        bar.direction = GTProgressBarDirection.clockwise
+        return bar
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -54,10 +72,14 @@ class MonitoringView: UIView {
     
     private func setupView() {
         backgroundColor = UIColor(red: 0.65, green: 0.91, blue: 0.98, alpha: 1.00)
+        
         addSubview(riverNameLabel)
         addSubview(weatherImageView)
         addSubview(weatherLabel)
         addSubview(temperatureLabel)
+        addSubview(riverHeightBar)
+        
+        riverHeightBar.displayLabel = false
         
         setupLayout()
     }
@@ -89,6 +111,13 @@ class MonitoringView: UIView {
             make.leftMargin.equalTo(weatherImageView.snp.right).inset(20)
             make.width.equalTo(100)
             make.height.equalTo(120)
+        }
+        
+        riverHeightBar.snp.makeConstraints { make in
+            make.topMargin.equalToSuperview().inset(10)
+            make.bottomMargin.equalTo(weatherLabel.snp.bottom)
+            make.rightMargin.equalToSuperview().inset(30)
+            make.width.equalTo(50)
         }
     }
     
