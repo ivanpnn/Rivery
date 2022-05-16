@@ -15,6 +15,7 @@
 		FA20E92C27E0D6B60044D774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA20E92A27E0D6B60044D774 /* Main.storyboard */; };
 		FA20E92E27E0D6BA0044D774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA20E92D27E0D6BA0044D774 /* Assets.xcassets */; };
 		FA20E93127E0D6BA0044D774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA20E92F27E0D6BA0044D774 /* LaunchScreen.storyboard */; };
+		FA241505283133A5009B5094 /* River.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA241504283133A5009B5094 /* River.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FA20E92D27E0D6BA0044D774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA20E93027E0D6BA0044D774 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA20E93227E0D6BA0044D774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA241504283133A5009B5094 /* River.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = River.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		FA20E92327E0D6B60044D774 /* Rivery */ = {
 			isa = PBXGroup;
 			children = (
+				FA24150328313395009B5094 /* Model */,
 				FA1C5A542825633B0073D9B9 /* View */,
 				FA20E92427E0D6B60044D774 /* AppDelegate.swift */,
 				FA20E92627E0D6B60044D774 /* SceneDelegate.swift */,
@@ -100,6 +103,14 @@
 				FA20E93227E0D6BA0044D774 /* Info.plist */,
 			);
 			path = Rivery;
+			sourceTree = "<group>";
+		};
+		FA24150328313395009B5094 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA241504283133A5009B5094 /* River.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 				FA1C5A56282563F10073D9B9 /* MonitoringView.swift in Sources */,
 				FA20E92927E0D6B60044D774 /* ViewController.swift in Sources */,
 				FA20E92527E0D6B60044D774 /* AppDelegate.swift in Sources */,
+				FA241505283133A5009B5094 /* River.swift in Sources */,
 				FA20E92727E0D6B60044D774 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
