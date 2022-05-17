@@ -16,6 +16,7 @@
 		FA20E92E27E0D6BA0044D774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA20E92D27E0D6BA0044D774 /* Assets.xcassets */; };
 		FA20E93127E0D6BA0044D774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA20E92F27E0D6BA0044D774 /* LaunchScreen.storyboard */; };
 		FA241505283133A5009B5094 /* River.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA241504283133A5009B5094 /* River.swift */; };
+		FA726D4628328E5C003A47B4 /* RiverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA726D4528328E5C003A47B4 /* RiverViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FA20E93027E0D6BA0044D774 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA20E93227E0D6BA0044D774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA241504283133A5009B5094 /* River.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = River.swift; sourceTree = "<group>"; };
+		FA726D4528328E5C003A47B4 /* RiverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiverViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		FA20E92327E0D6B60044D774 /* Rivery */ = {
 			isa = PBXGroup;
 			children = (
+				FA726D4428328E3B003A47B4 /* ViewModel */,
 				FA24150328313395009B5094 /* Model */,
 				FA1C5A542825633B0073D9B9 /* View */,
 				FA20E92427E0D6B60044D774 /* AppDelegate.swift */,
@@ -111,6 +114,14 @@
 				FA241504283133A5009B5094 /* River.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FA726D4428328E3B003A47B4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA726D4528328E5C003A47B4 /* RiverViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA1C5A56282563F10073D9B9 /* MonitoringView.swift in Sources */,
+				FA726D4628328E5C003A47B4 /* RiverViewModel.swift in Sources */,
 				FA20E92927E0D6B60044D774 /* ViewController.swift in Sources */,
 				FA20E92527E0D6B60044D774 /* AppDelegate.swift in Sources */,
 				FA241505283133A5009B5094 /* River.swift in Sources */,

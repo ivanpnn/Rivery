@@ -13,7 +13,7 @@ import GTProgressBar
 class MonitoringView: UIView {
     lazy var riverNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sungai Sukabanjir"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont(name: "ArialRoundedMTBold", size: 25)
         return label
@@ -47,7 +47,7 @@ class MonitoringView: UIView {
         let bar = GTProgressBar()
         bar.progress = 0.5
         bar.orientation = .vertical
-        bar.barBorderColor = UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
+        bar.barBorderColor = .black
         bar.barFillColor = UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
         bar.barBackgroundColor = UIColor(red:0.77, green:0.93, blue:0.78, alpha:1.0)
         bar.barBorderWidth = 1

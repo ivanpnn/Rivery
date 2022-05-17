@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Foundation
 
 class ViewController: UIViewController {
     
@@ -69,14 +70,23 @@ class ViewController: UIViewController {
     }()
     
     var timer = Timer()
+    
+    var selectedRiverIndex = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         riverList = initializedRiverList
         
+        if !UserDefaults.standard.bool(forKey: "isFreshInstall") {
+            selectedRiverIndex = 0
+            UserDefaults.standard.set(true, forKey: "isFreshInstall")
+        } else {
+            selectedRiverIndex = getRiverIndex()
+        }
+        
         setupView()
         setupLayout()
-//        startMonitoring()
+        startMonitoring()
     }
     
     func setupView() {
@@ -90,6 +100,8 @@ class ViewController: UIViewController {
         riverListView.addSubview(riverTableView)
         
         riverTableView.isScrollEnabled = false
+        
+        monitoringView.riverNameLabel.text = riverList[selectedRiverIndex].name
     }
     
     func setupLayout() {
@@ -138,18 +150,48 @@ class ViewController: UIViewController {
     }
     
     func startMonitoring(){
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
 
     @objc func updateCounting(){
         DispatchQueue.global(qos: .userInteractive).async {
-            print("This is run on the background queue")
-            let n = CGFloat.random(in: 0.0...1.0)
-            print("Random Number = \(n)")
+            let maxHeight = CGFloat(self.getRiverWithIndex(index: self.selectedRiverIndex).maxHeight)
+            let monitoredHeight = CGFloat.random(in: 0.0...CGFloat(maxHeight))
+            let progress = monitoredHeight / maxHeight
+            
             DispatchQueue.main.async {
-                self.monitoringView.riverHeightBar.progress = n
-                print("This is run on the main queue, after the previous code in outer block")
+                self.monitoringView.riverHeightBar.progress = progress
+                self.monitoringView.riverHeightBar.barFillColor = self.getProgressBarColorWith(progress: progress)
             }
+        }
+    }
+    
+    func getRiverWithIndex(index: Int) -> River {
+        return initializedRiverList[index]
+    }
+    
+    func saveRiverIndex(index: Int) {
+        UserDefaults.standard.set(index, forKey: "selectedRiverIndex")
+    }
+    
+    func getRiverIndex() -> Int {
+        return UserDefaults.standard.integer(forKey: "selectedRiverIndex")
+    }
+    
+    func getProgressBarColorWith(progress: CGFloat) -> UIColor {
+        switch progress {
+        case 0.0...0.5:
+            return UIColor(red:0.35, green:0.80, blue:0.36, alpha:1.0)
+            break
+        case 0.5...0.8:
+            return .systemYellow
+            break
+        case 0.8...1.0:
+            return .red
+            break
+        default:
+            return .clear
+            break
         }
     }
 }
@@ -162,11 +204,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RiverCell", for: indexPath)
         cell.textLabel?.text = riverList[indexPath.row].name
-        print("Cekusimas name = \(riverList[indexPath.row].name)")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRiverIndex = indexPath.row
+        saveRiverIndex(index: selectedRiverIndex)
+        
+        monitoringView.riverNameLabel.text = getRiverWithIndex(index: selectedRiverIndex).name
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -195,7 +240,6 @@ extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let rivers = initializedRiverList as NSArray
         let riverNameBeginsWithPredicate = NSPredicate(format: "name contains[c] %@", searchBar.text!)
-        print("Cekusimas searchBar = \(searchBar.text!)")
         let riverNameBeginsWith = rivers.filtered(using: riverNameBeginsWithPredicate)
         if riverNameBeginsWith.count > 0 {
             for index in (0..<riverList.count).reversed() {
@@ -204,10 +248,7 @@ extension ViewController: UISearchBarDelegate {
         }
         (riverNameBeginsWith as! [River]).forEach { river in
             riverList.append(river)
-            print("Cekusimas = \(river.name)")
-            
             DispatchQueue.main.async {
-                print("Cekusimas riverList = \(self.riverList[0].name)")
                 self.riverTableView.reloadData()
                 searchBar.resignFirstResponder()
             }
